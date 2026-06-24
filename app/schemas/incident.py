@@ -11,7 +11,7 @@ class IncidentCreate(BaseModel):
     assigned_to: Optional[str] = None
     service_name: str
     environment: str
-    created_at: datetime
+    #created_at: Optional[datetime] = None
 
 
 class IncidentUpdate(BaseModel):
