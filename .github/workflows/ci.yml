@@ -1,59 +1,52 @@
 name: Incident Management Platform CI
 
 on:
-  push:
-    branches:
-      - main
+push:
+branches:
+- main
 
-  pull_request:
-    branches:
-      - main
-
+pull_request:
+branches:
+- main
 
 jobs:
 
-  build:
-
-    runs-on: ubuntu-latest
+build:
 
 
-    steps:
+runs-on: ubuntu-latest
 
-      - name: Checkout repository
-        uses: actions/checkout@v4
+env:
+  DATABASE_URL: sqlite:///./test.db
 
+steps:
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-
-        with:
-          python-version: "3.13"
+  - name: Checkout repository
+    uses: actions/checkout@v4
 
 
-      - name: Install dependencies
+  - name: Setup Python
+    uses: actions/setup-python@v5
 
-        run: |
+    with:
+      python-version: "3.13"
 
-          python -m pip install --upgrade pip
 
-          pip install -r requirements.txt
+  - name: Install dependencies
 
-      
-      - name: Validate FastAPI imports
-      
-        env:
-         DATABASE_URL: postgresql://admin:admin123@localhost:5432/incidents
+    run: |
+      python -m pip install --upgrade pip
+      pip install -r requirements.txt
 
-        run: |
 
-          python -c "
-          from app.main import app
-          print('Application loaded successfully')
-          "
-          
+  - name: Validate FastAPI imports
 
-      - name: Build Docker image
+    run: |
+      python -c "from app.main import app; print('Application loaded successfully')"
 
-        run: |
 
-          docker build -t incident-api .
+  - name: Build Docker image
+
+    run: |
+      docker build -t incident-api .
+
