@@ -1,0 +1,32 @@
+@host = localhost
+@port = 8000
+@baseUrl = http://{{host}}:{{port}}
+
+### Welcome endpoint
+GET {{baseUrl}}/ HTTP/1.1
+
+### Create a new incident
+POST {{baseUrl}}/items HTTP/1.1
+Content-Type: application/json
+
+{
+  "short_description": "Database connection failed",
+  "description": "The production database is not responding to connection requests",
+  "criticality": "high",
+  "reporter": "john.doe@example.com",
+  "assigned_to": "jane.smith@example.com",
+  "service_name": "payment-service",
+  "environment": "production"
+}
+
+### List all incidents
+GET {{baseUrl}}/items HTTP/1.1
+
+### List incidents with pagination
+GET {{baseUrl}}/items?limit=5&offset=0 HTTP/1.1
+
+### Get incident by ID
+GET {{baseUrl}}/items/0 HTTP/1.1
+
+### Get non-existent incident (should return 404)
+GET {{baseUrl}}/items/999 HTTP/1.1
