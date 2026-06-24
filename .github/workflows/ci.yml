@@ -38,9 +38,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME}}/incidnet-management-platform:latest \ .
+          docker build -t ${{ secrets.DOCKER_USERNAME}}/incidnet-management-platform:latest .
       
       - name: Push Docker image
         run: |
-          docker push \
-          ${{ secrets.DOCKER_USERNAME}}/incidnet-management-platform:latest
+          docker push ${{ secrets.DOCKER_USERNAME}}/incidnet-management-platform:latest
