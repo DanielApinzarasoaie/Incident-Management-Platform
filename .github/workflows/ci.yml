@@ -38,8 +38,11 @@ jobs:
 
           pip install -r requirements.txt
 
-
+      
       - name: Validate FastAPI imports
+      
+        env:
+         DATABASE_URL: postgresql://admin:admin123@localhost:5432/incidents
 
         run: |
 
@@ -47,7 +50,7 @@ jobs:
           from app.main import app
           print('Application loaded successfully')
           "
-
+          
 
       - name: Build Docker image
 
