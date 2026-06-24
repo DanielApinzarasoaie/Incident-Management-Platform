@@ -16,3 +16,7 @@ postgres_data/
 alembic.ini
 
 .mypy_cache/
+
+requests.http
+
+requests.j2
