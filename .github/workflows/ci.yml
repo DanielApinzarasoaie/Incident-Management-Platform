@@ -44,16 +44,21 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKER_USERNAME}}/incidnet-management-platform:latest
 
-      - name: Configure kubectl
-        run: |
-          mkdir -p ~/.kube 
-          cat <<EOF > ~/.kube/config
-          ${{ secrets.KUBE_CONFIG }}
-          EOF
+# CD disabled temporarily
+# Reason:
+# GitHub hosted runners cannot access local Docker Desktop Kubernetes cluster.
+# Re-enable after moving Kubernetes to cloud.
 
-      - name: Deploy to Kubernetes
-        run: |
-          kubectl set image deployment/incident-api \
-          incident-api=kappadaniel/incidnet-management-platform:latest
+ #     - name: Configure kubectl
+ #       run: |
+ #         mkdir -p ~/.kube 
+ #         cat <<EOF > ~/.kube/config
+ #         ${{ secrets.KUBE_CONFIG }}
+ #         EOF
 
-          kubectl rollout status deployment/incident-api
+ #     - name: Deploy to Kubernetes
+ #       run: |
+ #         kubectl set image deployment/incident-api \
+ #         incident-api=kappadaniel/incidnet-management-platform:latest
+
+ #         kubectl rollout status deployment/incident-api
