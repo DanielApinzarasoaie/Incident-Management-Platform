@@ -44,12 +44,12 @@ jobs:
         run: |
           docker push ${{ secrets.DOCKER_USERNAME}}/incidnet-management-platform:latest
 
-      -name: Configure kubectl
+      - name: Configure kubectl
         run: |
           mkdir -p ~/.kube 
           echo '${{ secrets.KUBE_CONFIG }}'' > ~/.kube/config
 
-      -name: Deploy to Kubernetes
+      - name: Deploy to Kubernetes
         run: |
           kubectl set image deployment/incident-api \
           incident-api=kappadaniel/incidnet-management-platform:latest
